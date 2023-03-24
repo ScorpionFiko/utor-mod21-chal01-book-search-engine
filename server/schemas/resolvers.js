@@ -38,11 +38,12 @@ const resolvers = {
             return { token, user };
         },
 
-        SaveBook: async (parent, {book}, context) => {
+        saveBook: async (parent, {authors, bookId, description, image, link, title}, context) => {
             if (context.user) {
+                description = description || '';
                 return await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { books: {...book} } },
+                    { $addToSet: { savedBooks: {authors, bookId, description, image, link, title} } },
                     { new: true }
                 );
             }
@@ -51,12 +52,11 @@ const resolvers = {
 
         removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
-                const test= await User.findOneAndUpdate(
+                return await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $pull: { savedBooks: {bookId }} },
                     { new: true }
                 );
-                return test;
             }
             throw new AuthenticationError('You need to be logged in!');
         },

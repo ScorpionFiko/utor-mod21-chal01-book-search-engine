@@ -45,8 +45,8 @@ export const REMOVE_BOOK = gql`
 `;
 
 export const SAVE_BOOK = gql`
-mutation SaveBook($authors: [String]!, $description: String!, $bookId: String!, $image: String!, $link: String!, $title: String!) {
-  saveBook(authors: $authors, description: $description, bookId: $bookId, image: $image, link: $link, title: $title) {
+mutation saveBook($authors: [String]!, $bookId: String!, $description: String, $image: String, $link: String, $title: String!) {
+  saveBook(authors: $authors, bookId: $bookId, description: $description, image: $image, link: $link, title: $title) {
     _id
     username
     email
