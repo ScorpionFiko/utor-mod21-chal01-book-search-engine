@@ -1,3 +1,4 @@
+// importing bootstrap containers
 import {
   Container,
   Card,
@@ -5,10 +6,11 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
-
+// importing graphQL enablers
 import { useQuery, useMutation } from '@apollo/client';
 import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
+// importing local storage function
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
@@ -16,13 +18,15 @@ const SavedBooks = () => {
   // set the query and mutation
   const { loading, data } =  useQuery(GET_ME);
   const userData = data?.me || {}
-  const [removeBook, _] = useMutation(REMOVE_BOOK);
+  // eslint-disable-next-line no-unused-vars
+  const [removeBook] = useMutation(REMOVE_BOOK);
 
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
 
     try {
+      // uses graphQL to execute a query to remove book from user 
       const { data } = await removeBook({ variables: {bookId}});
 
       // upon success, remove book's id from localStorage

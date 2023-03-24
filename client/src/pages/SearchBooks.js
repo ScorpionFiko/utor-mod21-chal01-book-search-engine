@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
+// importing graphQL enablers
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import { searchGoogleBooks } from "../utils/API";
 import { SAVE_BOOK } from "../utils/mutations";
+// import google API fetch
+import { searchGoogleBooks } from "../utils/API";
+// import localstorage functions
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 const SearchBooks = () => {
@@ -11,7 +14,7 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
-  const [saveBook, {error, data}] = useMutation(SAVE_BOOK);
+  const [saveBook] = useMutation(SAVE_BOOK);
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
@@ -30,12 +33,13 @@ const SearchBooks = () => {
     }
 
     try {
+      // gets books from google API
       const response = await searchGoogleBooks(searchInput);
 
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
-
+      // gets the API response into an array and selects five fields to store
       const { items } = await response.json();
 
       const bookData = items.map((book) => ({
@@ -45,7 +49,7 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || "",
       }));
-
+      // updating the state
       setSearchedBooks(bookData);
       setSearchInput("");
     } catch (err) {
