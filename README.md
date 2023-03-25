@@ -3,7 +3,7 @@ University of Toronto - Module 21 - Challenge 01 - Book Search Engine
 
 ## Description
 
-Repository containing the code for the Book Search engine application. This is a full MERN stack application utilizing GraphQL for data retrieval. The applicatoin is simple in nature: 
+Repository containing the code for the Book Search engine application. This is a full MERN stack application utilizing GraphQL for data retrieval. The application is simple in nature: 
 - if the user is logged in: 
     - the user can search for books
     - on the search page, the user can mark the books for further review
@@ -18,7 +18,7 @@ The "account" section of the page is protected, and the user must be logged in t
 Below is the image of the Book Search Engine when user is not logged in.
 ![BSE - Landing](./assets/images/BSE-01-landing.png)
 
-Below is the image of the Book Search Engine when user is logged in (notice the buttons on the bottem left of the cards).
+Below is the image of the Book Search Engine when user is logged in (notice the buttons on the bottom left of the cards).
 ![BSE - Landing Logged In](./assets/images/BSE-02-landing-loggedin.png)
 
 Below is the image of the "profile" section with previously selected books.
@@ -85,7 +85,7 @@ To access application
     1. view your existing saved books; notice the red button at the bottom to "delete" book.
     2. for books that you don't want, click on the "delete" button. Deleting a book will only remove it from your listing; it will not remove it from google.
 4. Allow 2 hours pass by (max life of a token is 2 hours)
-    1. attempt to either access the ```/saved``` route or click on the "delete" button - you should be redirected to the main page and the login button will not be visible
+    1. attempt to either: access the ```/saved``` route, click on the "delete" button, or click on the "save book" button - you should be redirected to the main page and the login button will not be visible
 
 
 back to [Table of Contents](#table-of-contents)
@@ -122,7 +122,7 @@ back to [Table of Contents](#table-of-contents)
 
 Here are some of the items to be considered for future development.
 1. Rewrite the typeDef for Save book query to use an input Type as opposed to using individual parameters 
-2. Modify the image source to use either http or https depending on the host protocol. The Google API returns the image link as an http links. However, since the App is deployed to Heroku - which by default is https - a lot of warning messasges get generated in the Chrome dev tools console about that the fact that a request is made to an http resource.
+2. Modify the image source to use either http or https depending on the host protocol. The Google API returns the image link as an http links. However, since the App is deployed to Heroku - which by default is https - a lot of warning messages get generated in the Chrome dev tools console about that the fact that a request is made to an http resource.
 3. Add links for purchasing/downloading/viewing the books if such links exist
 4. Convert to PWA
 
