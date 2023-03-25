@@ -12,9 +12,13 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 // importing local storage function
 import { removeBookId } from '../utils/localStorage';
+import Auth from '../utils/auth';
 
 const SavedBooks = () => {
-
+  // check if user is still logged in; if not redirect
+  if (!Auth.loggedIn()) {
+    window.location.replace('/');
+  }
   // set the query and mutation
   const { loading, data } =  useQuery(GET_ME);
   const userData = data?.me || {}
@@ -24,7 +28,10 @@ const SavedBooks = () => {
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
-
+    // check if user is still logged in; if not redirect
+    if (!Auth.loggedIn()) {
+      window.location.replace('/');
+    }
     try {
       // uses graphQL to execute a query to remove book from user 
       const { data } = await removeBook({ variables: {bookId}});

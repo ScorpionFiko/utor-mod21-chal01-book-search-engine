@@ -59,6 +59,10 @@ const SearchBooks = () => {
 
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
+    // check if user is still logged in; if not redirect
+    if (!Auth.loggedIn()) {
+      window.location.replace('/');
+    }
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
